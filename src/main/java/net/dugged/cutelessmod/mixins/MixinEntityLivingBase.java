@@ -1,17 +1,21 @@
 package net.dugged.cutelessmod.mixins;
 
 import net.dugged.cutelessmod.Configuration;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+import org.lwjgl.input.Mouse;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -67,6 +71,14 @@ public abstract class MixinEntityLivingBase extends Entity {
 			this.motionZ += forward * f2 + strafe * f1;
 			ci.cancel();
 		}
+	}
+
+	@ModifyVariable(method = "moveRelative", at = @At("HEAD"), ordinal = 3)
+	public float cutelessmod$SpeedAdjust(final float friction) {
+		if (Configuration.beaconOneSpeed && (EntityLivingBase) (Object) this instanceof EntityPlayer && friction > 0.1133f && Mouse.isButtonDown(0) && !isSprinting()) {
+			return 0.1133f;
+		}
+		return friction;
 	}
 
 	@Unique

@@ -82,6 +82,8 @@ public class Configuration {
 	public static boolean weirdShift2Shift6LinuxBug = false;
 	public static boolean worldEditCompass = false;
 
+	public static boolean beaconOneSpeed = false;
+
 	// Ints
 	@Config.RangeInt(min = 0)
 	public static int _speedyPlace = 4;
