@@ -48,6 +48,10 @@ public class CutelessModUtils {
 		return Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54);
 	}
 
+	public static boolean isCtrlKeyDown() {
+		return Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
+	}
+
 	public static RayTraceResult rayTrace(Vec3d vec31, Vec3d vec32, int dist, boolean displayRaytrace, boolean stopMidAir) {
 		World world = mc.world;
 		if (!Double.isNaN(vec31.x) && !Double.isNaN(vec31.y) && !Double.isNaN(vec31.z)) {

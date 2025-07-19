@@ -236,6 +236,10 @@ public class CutelessMod {
 			player.rotationYaw = (int) (Math.round(player.rotationYaw / 45F) * 45F);
 			mc.ingameGUI.setOverlayMessage("Thanos'd.", false);
 		}
+
+		if (KeyBindings.dropItemsKey.isPressed()) {
+			DropMiningItems.dropMiningItems();
+		}
 	}
 
 	@SubscribeEvent
